@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/res/merged/debug/menu/navigation_drawer.xml",
+        "source": "/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/src/main/res/menu/navigation_drawer.xml"
+    },
+    {
+        "merged": "/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/res/merged/debug/menu/bottom_navigation_items.xml",
+        "source": "/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/src/main/res/menu/bottom_navigation_items.xml"
+    }
+]

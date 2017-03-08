@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/tungphan/.android/build-cache/a2ee7dad2fb77fe31070cab5b082dcdc6323ed8a/output/jars/classes.jar"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-304e74b4865e46134eaae991f9166fa5207f58e8.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.android/build-cache/2ef781dfc9b80ade5d3fd28873aee921d664e90d/output/jars/classes.jar"
+        revision="25.0.2"
+        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-18df36aa2c7c3d18adc050765698417b51757bd5.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.8.0/5ea7af56cc7c567ed9856d99efb30740e9b17ff/okio-1.8.0.jar"
+        revision="25.0.2"
+        sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/okio-1.8.0-aedc00b89465d3c078db11085da5f3c5f4cedf65.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.android/build-cache/ae2f7bb372eb4773aabc2db6c4e734148f4d93d5/output/jars/classes.jar"
+        revision="25.0.2"
+        sha1="152de8da301561dcb0946471697a420d8f7a68c5">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-8966b2db9787e2464bc390ed95defd4802cb9e1c.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/Documents/AndroidSDK/sdk/extras/android/m2repository/com/android/support/support-annotations/25.2.0/support-annotations-25.2.0.jar"
+        revision="25.0.2"
+        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/support-annotations-25.2.0-73c47edc7f249f663b9657f718a93607919df3a5.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/Documents/AndroidSDK/sdk/platforms/android-25/optional/org.apache.http.legacy.jar"
+        revision="25.0.2"
+        sha1="5f0541a4298daa0590b22cfbde43f85e2a675545">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackRuntimeLibraries/debug/jars/8000/40/org.apache.http.legacy-425e722e38845ee47fc56a65c80193ff44aadb8e.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.android/build-cache/3b015cea60e0ce23407a0e747fd8c68153a68971/output/jars/classes.jar"
+        revision="25.0.2"
+        sha1="e51c2f662bb72419632af5192553c37e33890a99">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-ce1684b84b56c30a8e6e9fe26ebb958108dd612b.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.android/build-cache/169995b9218e6c21b8d371a18d30983f421133a2/output/jars/classes.jar"
+        revision="25.0.2"
+        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-4d3e7ba5c5454bfb3bd902891f1e21d18d0bf1f1.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.android/build-cache/600faf488679cec0aa1603b3b173d1eccc02d582/output/jars/classes.jar"
+        revision="25.0.2"
+        sha1="ea6a989b83d19b1b461281e0475a6cd6514897f8">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-61087cb2ee8e04006b027ad4e938e6fa16b4ca11.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.android/build-cache/6c7eb07aabd17ff8f001591db93406fa806d065a/output/jars/classes.jar"
+        revision="25.0.2"
+        sha1="68956f5ba1517b7a3d513ba540548e257741cbae">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-8d1cf63f4291c00bfcaae39504b0076a32ae426c.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.android/build-cache/154294c048984609b5898da71585d60150ed7879/output/jars/classes.jar"
+        revision="25.0.2"
+        sha1="7f2f348b830f292429db987f74ba3e67c6752322">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-2c6f959d11f0fb4db6cc4194b3a14e4f3fe24370.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.0/c4ba5371a29ac9b2ad6129b1d39ea38750043eff/gson-2.8.0.jar"
+        revision="25.0.2"
+        sha1="c4ba5371a29ac9b2ad6129b1d39ea38750043eff">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/gson-2.8.0-02cb66fa277f5aeea07414e0ef0a1240329f2eea.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.android/build-cache/49c1b0e3e6b71796236813d15a769a2ce2617083/output/jars/classes.jar"
+        revision="25.0.2"
+        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-3f7922618e4f78ee7ba426c4851fe77538e7207a.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.android/build-cache/a2f4eeff373ad56215264976b707f0bbdfdabfe2/output/jars/classes.jar"
+        revision="25.0.2"
+        sha1="cb454b52545859ed2f24a6c01366805b0fa04b22">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-5a96a0fb5e4c2331c7b4dba60f95c35093a598e6.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.android/build-cache/0fe285f54afad15ad89c639d2d89339acb550d24/output/jars/classes.jar"
+        revision="25.0.2"
+        sha1="810f41e5b7fd99f196ebeabe865ba2c54e7e76dc">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-b157720c1f7f79b96beb713b496867432e5aec2e.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.3.0/2b802460eea20f8f2ad9c08c74e0f14718e88aa9/okhttp-3.3.0.jar"
+        revision="25.0.2"
+        sha1="2b802460eea20f8f2ad9c08c74e0f14718e88aa9">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/okhttp-3.3.0-6576a22408d1019a3fc997e1acc5d7f8d7e14466.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.1.0/aa557d71ead91cbf26e0c316a0f593d168303309/converter-gson-2.1.0.jar"
+        revision="25.0.2"
+        sha1="aa557d71ead91cbf26e0c316a0f593d168303309">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/converter-gson-2.1.0-94de69d73db01d7ed0575bc05d9c91533a0d7432.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.1.0/2de7cd8b95b7021b1d597f049bcb422055119f2c/retrofit-2.1.0.jar"
+        revision="25.0.2"
+        sha1="2de7cd8b95b7021b1d597f049bcb422055119f2c">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/retrofit-2.1.0-4fe41ffd16de634800b56f0406f915cd3723d21b.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.android/build-cache/f3272b1fdf7f602f69a10674fa8b4b50b701ede7/output/jars/classes.jar"
+        revision="25.0.2"
+        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-5d05453c4d5e1d232c9b64361b8ce4b961d6c937.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/Documents/AndroidSDK/sdk/platforms/android-25/android.jar"
+        revision="25.0.2"
+        sha1="712a0312fe844a21a1b3812fa960c363a1578984">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackRuntimeLibraries/debug/jars/8000/40/android-fb707db349a0681bbda3c7b113ece93e84913f05.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.android/build-cache/2af2868c133200c783ca64100ee49ee45068b059/output/jars/classes.jar"
+        revision="25.0.2"
+        sha1="702d339bc0a81d21354cd7e2cf2b67225fa4a16c">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-eb8408fda0ba1bfe4ca1b7ba78c4593c69d5df2c.jar" />
+    </item>
+    <item
+        jar="/Applications/Android Studio.app/Contents/gradle/m2repository/com/android/databinding/baseLibrary/2.3.0/baseLibrary-2.3.0.jar"
+        revision="25.0.2"
+        sha1="cf0b6ab1d94f770655f81657b93fce2ba4cd331d">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/baseLibrary-2.3.0-3d8a92b3f03695a50c7548f68422f80006780753.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.android/build-cache/276fa34238a017e1815c6bc9c4d86231140f0079/output/jars/classes.jar"
+        revision="25.0.2"
+        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-5d5f089dc015ac5232e1e740045004c8a39cb483.jar" />
+    </item>
+    <item
+        jar="/Users/tungphan/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        revision="25.0.2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/picasso-2.5.2-7ca82475d628fef5327bb8d62ec6d72426d0ff04.jar" />
+    </item>
+
+</items>

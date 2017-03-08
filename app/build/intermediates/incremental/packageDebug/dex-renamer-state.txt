@@ -1,0 +1,4 @@
+#Wed Mar 08 16:58:23 ICT 2017
+base.0=/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/jack/debug/folders/1000/1f/main
+renamed.0=classes.dex
+file.0=/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/transforms/jack/debug/folders/1000/1f/main/classes.dex

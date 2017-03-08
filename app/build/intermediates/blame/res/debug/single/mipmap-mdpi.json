@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_launcher.png",
+        "source": "/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/build/intermediates/res/merged/debug/mipmap-mdpi/wizeline.png",
+        "source": "/Users/tungphan/Documents/AndroidProjects/WizeLineRemoteChallenge/app/src/main/res/mipmap-mdpi/wizeline.png"
+    }
+]

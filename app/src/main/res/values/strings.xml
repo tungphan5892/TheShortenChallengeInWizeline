@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">WizeLine Remote Challenge</string>
+    <string name="default_string_at_user_name">\@username</string>
+    <string name="default_string_user_name">User Name</string>
+    <string name="default_string_user_description">User Description</string>
+    <string name="default_string_tweet_content">Tweet\'s content</string>
+    <string name="default_string_tweet_owner">Tweet\'s owner</string>
+    <string name="text_share_button">Share</string>
+    <string name="text_search_button">Search</string>
+    <string name="text_tweet_button">Tweet</string>
+    <string name="text_setting_button">Settings</string>
+    <string name="error_data_in_response">There\'s something wrong when loading data.</string>
+    <string name="error_could_not_get_json">Couldn\'t get json from server.</string>
+    <string name="error_something_wrong">Sorry, there\'s something wrong &#160;</string>
+    <string name="hint_reply_edittext">&#160;&#160;&#160;&#160;Reply</string>
+    <string name="title_alert_dialog_permission_require">Permission require!</string>
+    <string name="title_alert_dialog_network_problem">Network Problem!</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_notification">Notifications</string>
+    <string name="message_alert_dialog_request_permission">Click yes to request permission.</string>
+    <string name="message_alert_dialog_turn_on_permission_in_setting">"Click yes to turn on Permission in Settings"</string>
+    <string name="message_alert_dialog_network_not_available">Network not available&#8230;!</string>
+    <string name="message_alert_dialog_please_turn_on_permission_in_setting">Please go to Settings and turn on the permission!</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="string_package">package:</string>
+    <string name="string_nested_scrollview">Sum</string>
+    <string name="text_total_count_default">140</string>
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web search</string>
+    <string name="app_not_available">Sorry, there\'s no web browser available</string>
+
+</resources>

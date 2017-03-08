@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="tungpt.wizelineremotechallenge.views.viewmodels.LeftDrawerMenuVM" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/user_info"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/user_background_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/user_profile_image"
+            android:layout_width="@dimen/profile_image_size"
+            android:layout_height="@dimen/profile_image_size"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/profile_image_margin_right"
+            android:layout_marginStart="@dimen/profile_image_margin_right"
+            android:src="@drawable/face" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="@dimen/user_activity_name_width"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_profile_image"
+            android:layout_marginLeft="@dimen/profile_image_margin_right"
+            android:layout_marginStart="@dimen/profile_image_margin_right"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
+            android:text="@{viewModel.leftDrawerMenuModel.userDescription}"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/user_description"
+            android:layout_width="@dimen/user_activity_description_width"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_name"
+            android:layout_marginLeft="@dimen/profile_image_margin_right"
+            android:layout_marginStart="@dimen/profile_image_margin_right"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
+            android:text="@{viewModel.leftDrawerMenuModel.userName}"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="@dimen/setting_button_size"
+            android:layout_height="@dimen/setting_button_size"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/setting_button_margin"
+            android:layout_marginEnd="@dimen/setting_button_margin"
+            android:layout_marginRight="@dimen/setting_button_margin"
+            android:background="@drawable/icon_setting" />
+
+        <ProgressBar
+            android:id="@+id/user_view_progress_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="@{viewModel.leftDrawerMenuModel.showLoading ? View.VISIBLE:View.GONE}" />
+    </RelativeLayout>
+</layout>
