@@ -1,13 +1,11 @@
 package tungpt.wizelineremotechallenge.activities.featuresactivity;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.view.LayoutInflater;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 
 import java.util.List;
 
@@ -15,8 +13,8 @@ import tungpt.wizelineremotechallenge.R;
 import tungpt.wizelineremotechallenge.activities.BaseActivity;
 import tungpt.wizelineremotechallenge.databinding.TimelineActivityBinding;
 import tungpt.wizelineremotechallenge.networks.models.Tweet;
+import tungpt.wizelineremotechallenge.utils.Utils;
 import tungpt.wizelineremotechallenge.views.iviewlistener.IUserProfileActivityListener;
-import tungpt.wizelineremotechallenge.views.viewmodels.LeftDrawerMenuVM;
 import tungpt.wizelineremotechallenge.views.viewmodels.TimelineActivityVM;
 import tungpt.wizelineremotechallenge.views.adapters.TweetsListRecyclerAdapter;
 
@@ -41,10 +39,15 @@ public class TimelineActivity extends BaseActivity implements IUserProfileActivi
         timelineActivityVM = new TimelineActivityVM(this);
         timelineActivityVM.setIUserProfileActivityListener(this);
         timelineActivityBinding = DataBindingUtil.inflate(getLayoutInflater()
-                ,R.layout.timeline_activity,parentLayout,true);
+                ,R.layout.timeline_activity,baseActivityBinding.contentFrame,true);
         timelineActivityBinding.setViewModel(timelineActivityVM);
         initNavigationDrawer(savedInstanceState);
-        timelineActivityVM.load
+        if(Utils.isConnectToNetwork(this)) {
+            timelineActivityVM.loadingUserTimeline();
+        }else{
+            Snackbar.make(timelineActivityBinding.parentView, R.string.snackbar_text_no_internet
+                    , Snackbar.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -55,6 +58,8 @@ public class TimelineActivity extends BaseActivity implements IUserProfileActivi
     @Override
     public void finishLoadingTimeline(List<Tweet> timeline) {
         TweetsListRecyclerAdapter adapter = new TweetsListRecyclerAdapter(this, timeline);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        timelineActivityBinding.tweetsRecyclerView.setLayoutManager(mLayoutManager);
         timelineActivityBinding.tweetsRecyclerView.setAdapter(adapter);
     }
 

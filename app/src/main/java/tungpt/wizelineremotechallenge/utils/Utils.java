@@ -44,7 +44,7 @@ public class Utils {
         ConnectivityManager ConnectionManager = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = ConnectionManager.getActiveNetworkInfo();
-        return networkInfo == null || !networkInfo.isConnected();
+        return networkInfo != null && networkInfo.isConnected();
     }
 
     public static int screenWidth(Context context) {

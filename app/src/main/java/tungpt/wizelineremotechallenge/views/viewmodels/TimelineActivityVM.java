@@ -60,6 +60,7 @@ public class TimelineActivityVM extends BaseObservable {
 
     public void hideLoading() {
         timelineActivityModel.setShowLoading(false);
+        notifyPropertyChanged(BR.showLoading);
     }
 
     public void addTweetButtonClick(@NonNull final View view){
@@ -67,7 +68,7 @@ public class TimelineActivityVM extends BaseObservable {
         context.startActivity(intent);
     }
 
-    private void loadingUserTimeline() {
+    public void loadingUserTimeline() {
         showLoading();
         ApiServices apiServiceUser = RetroClient.getApiServices();
         Call<List<Tweet>> call = apiServiceUser.getUserTimelineJson();

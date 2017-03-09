@@ -34,18 +34,21 @@ public class LeftDrawerMenuView extends RelativeLayout implements PlanetAdapter.
         super(context);
         this.context = context;
         initViews();
+        leftDrawerMenuVM.loadingUserDataForView();
     }
 
     public LeftDrawerMenuView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
         initViews();
+        leftDrawerMenuVM.loadingUserDataForView();
     }
 
     public LeftDrawerMenuView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
         initViews();
+        leftDrawerMenuVM.loadingUserDataForView();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -53,6 +56,7 @@ public class LeftDrawerMenuView extends RelativeLayout implements PlanetAdapter.
         super(context, attrs, defStyleAttr, defStyleRes);
         this.context = context;
         initViews();
+        leftDrawerMenuVM.loadingUserDataForView();
     }
 
     public void initViews() {
@@ -82,6 +86,6 @@ public class LeftDrawerMenuView extends RelativeLayout implements PlanetAdapter.
         Picasso.with(context).load(imageUrl)
                 .resize(imageView.getWidth(),
                         imageView.getHeight()).onlyScaleDown()
-                .into(leftDrawerMenuViewBinding.userBackgroundImage);
+                .into(imageView);
     }
 }

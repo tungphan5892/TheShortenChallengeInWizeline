@@ -74,6 +74,7 @@ public class LeftDrawerMenuVM extends BaseObservable {
     public String getUserDescription() {
         return leftDrawerMenuModel.getUserDescription();
     }
+
     @Bindable
     public String getProfileImageUrl() {
         return leftDrawerMenuModel.getProfileImageUrl();
@@ -94,12 +95,15 @@ public class LeftDrawerMenuVM extends BaseObservable {
         notifyPropertyChanged(BR.backgroundImageUrl);
     }
 
-    @BindingAdapter({"bind:imageUrl"})
-    public static void loadImage(ImageView imageView, String url) {
-        Picasso.with(imageView.getContext()).load(url).into(imageView);
+//    @BindingAdapter("app:imageUrl")
+    public static void loadImage(ImageView imageView, String imageUrl) {
+        Picasso.with(imageView.getContext())
+                .load(imageUrl)
+                .placeholder(R.drawable.face)
+                .into(imageView);
     }
 
-    private void loadingUserDataForView() {
+    public void loadingUserDataForView() {
         setShowLoading(true);
         ApiServices apiServices = RetroClient.getApiServices();
         Call<User> call = apiServices.getUserJson();
@@ -112,6 +116,9 @@ public class LeftDrawerMenuVM extends BaseObservable {
                     if (user != null) {
                         setUserName(user.getName());
                         setUserDescription(user.getDescription());
+                        setProfileImageUrl(user.getProfileImageUrl());
+                        setBackgroundImageUrl(user.getProfileBackgroundImageUrl());
+                        iLeftDrawerMenuListener.successLoadingData(user);
                     }
                 } else {
                     iLeftDrawerMenuListener.errorLoadingData();
