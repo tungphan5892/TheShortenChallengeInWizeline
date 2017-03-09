@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="tungpt.wizelineremotechallenge.activities.featuresactivity.UserProfileActivity">
+            android:name="tungpt.wizelineremotechallenge.activities.featuresactivity.TimelineActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -22,9 +22,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="tungpt.wizelineremotechallenge.activities.featuresactivity.SingleTweetActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait">
+            android:name="tungpt.wizelineremotechallenge.activities.featuresactivity.SingleTweetActivity">
+        </activity>
+        <activity
+            android:name="tungpt.wizelineremotechallenge.activities.featuresactivity.NewTweetActivity">
         </activity>
         <receiver
             android:name="tungpt.wizelineremotechallenge.broadcastreceivers.NetworkReceiver">

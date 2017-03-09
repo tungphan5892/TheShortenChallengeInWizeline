@@ -34,9 +34,11 @@ import android.widget.Toast;
 
 
 import tungpt.wizelineremotechallenge.R;
+import tungpt.wizelineremotechallenge.databinding.MainLayoutWithNavigationDrawerBinding;
 import tungpt.wizelineremotechallenge.databinding.ToolbarBinding;
 import tungpt.wizelineremotechallenge.manageconstants.IntentConstants;
 import tungpt.wizelineremotechallenge.utils.Utils;
+import tungpt.wizelineremotechallenge.views.viewmodels.BaseActivityVM;
 import tungpt.wizelineremotechallenge.views.views.LeftDrawerMenuView;
 
 /**
@@ -195,16 +197,6 @@ public class BaseActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-    }
-
-    public boolean checkNetworkConnection() {
-        ConnectivityManager ConnectionManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = ConnectionManager.getActiveNetworkInfo();
-        if (networkInfo == null || !networkInfo.isConnected()) {
-            showNetworkNotAvailable();
-            return false;
-        }
-        return true;
     }
 
     private void requestPermissionIfNeeded() {

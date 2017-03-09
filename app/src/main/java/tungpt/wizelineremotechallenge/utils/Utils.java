@@ -2,8 +2,13 @@ package tungpt.wizelineremotechallenge.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Point;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.WindowManager;
 
 /**
  * Created by Tung Phan on 2/15/2017.
@@ -33,5 +38,20 @@ public class Utils {
         Resources resources = context.getResources();
         DisplayMetrics displayMetrics = resources.getDisplayMetrics();
         return pixel / ((float) displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    }
+
+    public static boolean isConnectToNetwork(Context context) {
+        ConnectivityManager ConnectionManager = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = ConnectionManager.getActiveNetworkInfo();
+        return networkInfo == null || !networkInfo.isConnected();
+    }
+
+    public static int screenWidth(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        return size.x;
     }
 }
