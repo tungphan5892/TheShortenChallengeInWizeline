@@ -7,9 +7,9 @@ import android.databinding.BindingAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
+import tungpt.wizelineremotechallenge.App.WizelineApp;
 import tungpt.wizelineremotechallenge.BR;
 import tungpt.wizelineremotechallenge.R;
-import tungpt.wizelineremotechallenge.utils.Utils;
 import tungpt.wizelineremotechallenge.views.models.BaseActivityModel;
 
 
@@ -26,7 +26,7 @@ public class BaseActivityVM extends BaseObservable {
         baseActivityModel = new BaseActivityModel();
         int drawerLayoutMarginRight = (int) context.getResources()
                 .getDimension(R.dimen.navigation_drawer_margin_right_on_phone);
-        int drawerLayoutWidth = Utils.screenWidth(context) - drawerLayoutMarginRight;
+        int drawerLayoutWidth = WizelineApp.getScreenWidth() - drawerLayoutMarginRight;
         setDrawerLayoutWidth(drawerLayoutWidth);
     }
 

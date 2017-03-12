@@ -14,13 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/toolbar" />
-
         <ScrollView
             android:id="@+id/layout_tweet_content"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_below="@id/toolbar">
+            android:layout_height="300dp">
 
             <TextView
                 android:id="@+id/tweet_description"

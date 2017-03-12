@@ -1,4 +1,4 @@
-package tungpt.wizelineremotechallenge.activities.featuresactivity;
+package tungpt.wizelineremotechallenge.views.activities.featuresactivity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -6,11 +6,15 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import tungpt.wizelineremotechallenge.App.WizelineApp;
 import tungpt.wizelineremotechallenge.R;
-import tungpt.wizelineremotechallenge.activities.BaseActivity;
+import tungpt.wizelineremotechallenge.views.activities.BaseActivity;
 import tungpt.wizelineremotechallenge.databinding.TimelineActivityBinding;
 import tungpt.wizelineremotechallenge.networks.models.Tweet;
 import tungpt.wizelineremotechallenge.utils.Utils;
@@ -39,15 +43,14 @@ public class TimelineActivity extends BaseActivity implements IUserProfileActivi
         timelineActivityVM = new TimelineActivityVM(this);
         timelineActivityVM.setIUserProfileActivityListener(this);
         timelineActivityBinding = DataBindingUtil.inflate(getLayoutInflater()
-                ,R.layout.timeline_activity,baseActivityBinding.contentFrame,true);
+                , R.layout.timeline_activity, baseActivityBinding.contentFrame, true);
         timelineActivityBinding.setViewModel(timelineActivityVM);
-        initNavigationDrawer(savedInstanceState);
-        if(Utils.isConnectToNetwork(this)) {
-            timelineActivityVM.loadingUserTimeline();
-        }else{
-            Snackbar.make(timelineActivityBinding.parentView, R.string.snackbar_text_no_internet
-                    , Snackbar.LENGTH_LONG).show();
-        }
+        initNavigationDrawer();
+        loadingTimeLine();
+    }
+
+    private void loadingTimeLine() {
+        timelineActivityVM.loadingUserTimeline();
     }
 
     @Override

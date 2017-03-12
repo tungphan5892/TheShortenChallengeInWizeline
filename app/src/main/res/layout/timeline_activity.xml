@@ -16,13 +16,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/toolbar" />
-
         <FrameLayout
             android:id="@+id/under_line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@id/toolbar"
             android:background="@android:color/darker_gray">
 
         </FrameLayout>

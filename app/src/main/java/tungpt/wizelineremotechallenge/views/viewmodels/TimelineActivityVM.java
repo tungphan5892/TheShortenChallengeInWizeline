@@ -14,7 +14,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import tungpt.wizelineremotechallenge.activities.featuresactivity.NewTweetActivity;
+import tungpt.wizelineremotechallenge.views.activities.featuresactivity.NewTweetActivity;
 import tungpt.wizelineremotechallenge.listeners.ApiServices;
 import tungpt.wizelineremotechallenge.networks.RetroClient;
 import tungpt.wizelineremotechallenge.networks.models.Tweet;

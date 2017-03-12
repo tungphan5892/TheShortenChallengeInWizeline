@@ -43,5 +43,6 @@
     <string name="action_websearch">Web search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
     <string name="snackbar_text_no_internet">Devices doesn\'t connect to internet.</string>
-
+    <integer name="maximum_tweet">140</integer>
+    <string name="hint_tweet_text">What\'s happening?</string>
 </resources>

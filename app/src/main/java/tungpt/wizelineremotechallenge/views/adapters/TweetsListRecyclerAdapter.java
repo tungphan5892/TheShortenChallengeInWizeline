@@ -16,7 +16,7 @@ import java.util.List;
 
 import tungpt.wizelineremotechallenge.manageconstants.IntentConstants;
 import tungpt.wizelineremotechallenge.R;
-import tungpt.wizelineremotechallenge.activities.featuresactivity.SingleTweetActivity;
+import tungpt.wizelineremotechallenge.views.activities.featuresactivity.SingleTweetActivity;
 import tungpt.wizelineremotechallenge.networks.models.Tweet;
 
 /**

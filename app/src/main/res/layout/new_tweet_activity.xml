@@ -13,21 +13,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/toolbar"/>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_below="@id/toolbar"
         android:id="@+id/edittext_tweet">
 
         <EditText
             android:id="@+id/tweet_description"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="top|left"
-            android:hint="What's happening?"
+            android:background="@android:color/transparent"
+            android:hint="@string/hint_tweet_text"
+            android:maxLength="@integer/maximum_tweet"
             android:layout_marginEnd="@dimen/single_tweet_child_view_margin"
             android:layout_marginLeft="@dimen/single_tweet_child_view_margin"
             android:layout_marginRight="@dimen/single_tweet_child_view_margin"

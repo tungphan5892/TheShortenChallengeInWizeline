@@ -15,13 +15,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- The main content view -->
-        <FrameLayout
-            android:id="@+id/content_frame"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/black" />
-        <!-- The navigation drawer -->
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <FrameLayout
+                android:layout_below="@id/toolbar"
+                android:id="@+id/content_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black" />
+        </RelativeLayout>
+
         <tungpt.wizelineremotechallenge.views.views.LeftDrawerMenuView
             android:id="@+id/left_drawer"
             android:layout_width="match_parent"
