@@ -16,9 +16,12 @@ import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 
+import javax.inject.Inject;
+
 import tungpt.wizelineremotechallenge.R;
 import tungpt.wizelineremotechallenge.databinding.LeftDrawerMenuViewBinding;
 import tungpt.wizelineremotechallenge.eventbus.FinishLoadingUserInfoEvent;
+import tungpt.wizelineremotechallenge.listeners.ApiServices;
 import tungpt.wizelineremotechallenge.networks.models.User;
 import tungpt.wizelineremotechallenge.views.adapters.PlanetAdapter;
 import tungpt.wizelineremotechallenge.views.iviewlistener.ILeftDrawerMenuListener;
@@ -32,7 +35,10 @@ public class LeftDrawerMenuView extends RelativeLayout implements PlanetAdapter.
 
     private LeftDrawerMenuViewBinding leftDrawerMenuViewBinding;
     private LeftDrawerMenuVM leftDrawerMenuVM;
-    private Context context;
+
+    public void loadUserData(ApiServices apiServices){
+        leftDrawerMenuVM.loadingUserDataForView(apiServices);
+    }
 
     public LeftDrawerMenuView(Context context) {
         this(context,null);
@@ -44,25 +50,21 @@ public class LeftDrawerMenuView extends RelativeLayout implements PlanetAdapter.
 
     public LeftDrawerMenuView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context = context;
         initViews();
-        leftDrawerMenuVM.loadingUserDataForView();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public LeftDrawerMenuView(Context context, AttributeSet attrs, int defStyleAttr
             , int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        this.context = context;
         initViews();
-        leftDrawerMenuVM.loadingUserDataForView();
     }
 
     public void initViews() {
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        LayoutInflater layoutInflater = LayoutInflater.from(this.getContext());
         leftDrawerMenuViewBinding = DataBindingUtil.inflate(layoutInflater
                 , R.layout.left_drawer_menu_view, this, true);
-        leftDrawerMenuVM = new LeftDrawerMenuVM(context);
+        leftDrawerMenuVM = new LeftDrawerMenuVM();
         leftDrawerMenuVM.setiLeftDrawerMenuListener(this);
         leftDrawerMenuViewBinding.setViewModel(leftDrawerMenuVM);
     }
@@ -86,7 +88,7 @@ public class LeftDrawerMenuView extends RelativeLayout implements PlanetAdapter.
     }
 
     private void loadImage(ImageView imageView, String imageUrl) {
-        Picasso.with(context).load(imageUrl)
+        Picasso.with(this.getContext()).load(imageUrl)
                 .resize(imageView.getWidth(),
                         imageView.getHeight()).onlyScaleDown()
                 .into(imageView);

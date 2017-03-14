@@ -6,6 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
@@ -22,25 +26,33 @@ import tungpt.wizelineremotechallenge.views.activities.featuresactivity.Timeline
 /**
  * Created by Tung Phan on 2/17/2017.
  */
-
+@Module
 public class RetroClient {
     private static final String TAG = TimelineActivity.class.getSimpleName();
-    private static final String ROOT_URL = "https://wizetwitterproxy.herokuapp.com";
     private static final int OFFLINE_EXPIRE_TIME_DAY = 7;
     private static final int EXPIRE_TIME_MINS = 2;
     private static final String CACHE_CONTROL = "cache_control";
     private static final int CACHE_SIZE = 10 * 1024 * 1024;
     private static final String HTTP_CACHE = "http_cache";
+    private String baseUrl;
 
-    private static Retrofit getRetrofitInstance() {
+    public RetroClient(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
+
+    @Provides
+    @Singleton
+    Retrofit getRetrofitInstance() {
         return new Retrofit.Builder()
-                .baseUrl(ROOT_URL)
+                .baseUrl(baseUrl)
                 .client(provideOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 
-    private static OkHttpClient provideOkHttpClient() {
+    @Provides
+    @Singleton
+    OkHttpClient provideOkHttpClient() {
         return new OkHttpClient.Builder()
                 .addInterceptor(provideOfflineCacheInterceptor())
                 .addNetworkInterceptor(provideCacheInterceptor())
@@ -48,7 +60,9 @@ public class RetroClient {
                 .build();
     }
 
-    private static Cache provideCache() {
+    @Provides
+    @Singleton
+    Cache provideCache() {
         Cache cache = null;
         try {
             cache = new Cache(new File(WizelineApp.getInstance().getCacheDir(), HTTP_CACHE),
@@ -59,8 +73,7 @@ public class RetroClient {
         return cache;
     }
 
-
-    public static ApiServices getApiServices() {
+    public ApiServices getApiServices() {
         return getRetrofitInstance().create(ApiServices.class);
     }
 

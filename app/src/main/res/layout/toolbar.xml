@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
 
         <import type="android.view.View" />
@@ -8,6 +9,7 @@
             name="viewModel"
             type="tungpt.wizelineremotechallenge.views.viewmodels.ToolbarVM" />
     </data>
+
     <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -20,13 +22,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <!--<ImageView-->
-                <!--android:id="@+id/profile_image"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:src="@drawable/face" />-->
 
             <!-- This is a centered title -->
             <TextView
@@ -48,7 +43,18 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/icon_search" />
+                android:src="@drawable/icon_search"
+                android:visibility="@{viewModel.btnSearchVisible ? View.VISIBLE : View.GONE}"/>
+
+            <ImageButton
+                android:id="@+id/btn_close"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/icon_close_black"
+                android:visibility="@{viewModel.btnCloseVisible ? View.VISIBLE : View.GONE}"/>
 
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>

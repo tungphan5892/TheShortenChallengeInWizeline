@@ -15,7 +15,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
@@ -23,7 +22,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,12 +37,13 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.List;
-
+import tungpt.wizelineremotechallenge.App.WizelineApp;
 import tungpt.wizelineremotechallenge.R;
+import tungpt.wizelineremotechallenge.dagger.components.AppComponent;
 import tungpt.wizelineremotechallenge.databinding.MainLayoutWithNavigationDrawerBinding;
 import tungpt.wizelineremotechallenge.databinding.ToolbarBinding;
 import tungpt.wizelineremotechallenge.eventbus.FinishLoadingUserInfoEvent;
+import tungpt.wizelineremotechallenge.listeners.ApiServices;
 import tungpt.wizelineremotechallenge.manageconstants.IntentConstants;
 import tungpt.wizelineremotechallenge.utils.Utils;
 import tungpt.wizelineremotechallenge.views.viewmodels.BaseActivityVM;
@@ -54,7 +53,7 @@ import tungpt.wizelineremotechallenge.views.viewmodels.ToolbarVM;
  * Created by Tung Phan on 2/15/2017.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     private static final String TAG = BaseActivity.class.getSimpleName();
     private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
     private LocalBroadcastManager mLocalBroadcastManager;
@@ -65,7 +64,7 @@ public class BaseActivity extends AppCompatActivity {
     private ToolbarBinding toolbarBinding;
     private BaseActivityVM baseActivityVM;
     protected MainLayoutWithNavigationDrawerBinding baseActivityBinding;
-    private ToolbarVM toolbarVM;
+    protected ToolbarVM toolbarVM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +73,15 @@ public class BaseActivity extends AppCompatActivity {
         baseActivityBinding = DataBindingUtil.setContentView(this, R.layout.main_layout_with_navigation_drawer);
         baseActivityVM = new BaseActivityVM(this);
         baseActivityBinding.setViewModel(baseActivityVM);
+        initInjector(((WizelineApp) getApplication()).getAppComponent());
         if (Utils.isHigherThanMasmarlow()) {
             requestPermissionIfNeeded();
         }
         mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
         initToolbar();
     }
+
+    protected abstract void initInjector(AppComponent appComponent);
 
     @Override
     protected void onPause() {
@@ -99,9 +101,9 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void initToolbar() {
-        toolbarBinding = DataBindingUtil.inflate(getLayoutInflater(),R.layout.toolbar
-                ,baseActivityBinding.toolbar,true);
-        toolbarVM = new ToolbarVM(this);
+        toolbarBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.toolbar
+                , baseActivityBinding.toolbar, true);
+        toolbarVM = new ToolbarVM();
         toolbarBinding.setViewModel(toolbarVM);
         toolbarBinding.toolbar.setBackgroundColor(Color.WHITE);
         setSupportActionBar(toolbarBinding.toolbar);
@@ -133,17 +135,17 @@ public class BaseActivity extends AppCompatActivity {
         baseActivityBinding.drawerLayout.addDrawerListener(mDrawerToggle);
     }
 
+    protected void loadUserDataInNavigationDrawer(ApiServices apiServices) {
+        baseActivityBinding.leftDrawer.loadUserData(apiServices);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.navigation_drawer, menu);
         return true;
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        boolean drawerOpen = baseActivityBinding.drawerLayout
-                .isDrawerOpen(baseActivityBinding.leftDrawer);
-        menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -153,15 +155,15 @@ public class BaseActivity extends AppCompatActivity {
             return true;
         }
         switch (item.getItemId()) {
-            case R.id.action_websearch:
-                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-                intent.putExtra(SearchManager.QUERY, getSupportActionBar().getTitle());
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(this, R.string.app_not_available, Toast.LENGTH_LONG).show();
-                }
-                return true;
+//            case R.id.action_websearch:
+//                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+//                intent.putExtra(SearchManager.QUERY, getSupportActionBar().getTitle());
+//                if (intent.resolveActivity(getPackageManager()) != null) {
+//                    startActivity(intent);
+//                } else {
+//                    Toast.makeText(this, R.string.app_not_available, Toast.LENGTH_LONG).show();
+//                }
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -301,7 +303,7 @@ public class BaseActivity extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void doThis(FinishLoadingUserInfoEvent finishLoadingUserInfoEvent) {
-        if(finishLoadingUserInfoEvent.getResultCode() == Activity.RESULT_OK){
+        if (finishLoadingUserInfoEvent.getResultCode() == Activity.RESULT_OK) {
             final ArrayList<View> outViews = new ArrayList<>();
             String contentDesc = getResources().getString(R.string.drawer_open);
             baseActivityBinding.toolbar.findViewsWithText(outViews, contentDesc

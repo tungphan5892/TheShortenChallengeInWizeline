@@ -11,12 +11,13 @@ import com.android.databinding.library.baseAdapters.BR;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import tungpt.wizelineremotechallenge.views.activities.featuresactivity.NewTweetActivity;
 import tungpt.wizelineremotechallenge.listeners.ApiServices;
-import tungpt.wizelineremotechallenge.networks.RetroClient;
 import tungpt.wizelineremotechallenge.networks.models.Tweet;
 import tungpt.wizelineremotechallenge.views.iviewlistener.IUserProfileActivityListener;
 import tungpt.wizelineremotechallenge.views.models.TimelineActivityModel;
@@ -26,18 +27,15 @@ import tungpt.wizelineremotechallenge.views.models.TimelineActivityModel;
  */
 
 public class TimelineActivityVM extends BaseObservable {
-    private TimelineActivityModel timelineActivityModel = new TimelineActivityModel();
-    private Context context;
+    private final TimelineActivityModel timelineActivityModel = new TimelineActivityModel();
     private List<Tweet> timeline;
     private IUserProfileActivityListener iUserProfileActivityListener;
+    @Inject
+    ApiServices apiServices;
 
 
     public void setIUserProfileActivityListener(IUserProfileActivityListener iUserProfileActivityListener) {
         this.iUserProfileActivityListener = iUserProfileActivityListener;
-    }
-
-    public TimelineActivityVM(Context context) {
-        this.context = context;
     }
 
     public TimelineActivityModel getTimelineActivityModel() {
@@ -64,14 +62,13 @@ public class TimelineActivityVM extends BaseObservable {
     }
 
     public void addTweetButtonClick(@NonNull final View view){
-        Intent intent = new Intent(context,NewTweetActivity.class);
-        context.startActivity(intent);
+        Intent intent = new Intent(view.getContext(),NewTweetActivity.class);
+        view.getContext().startActivity(intent);
     }
 
-    public void loadingUserTimeline() {
+    public void loadingUserTimeline(ApiServices apiServices) {
         showLoading();
-        ApiServices apiServiceUser = RetroClient.getApiServices();
-        Call<List<Tweet>> call = apiServiceUser.getUserTimelineJson();
+        Call<List<Tweet>> call = apiServices.getUserTimelineJson();
         call.enqueue(new Callback<List<Tweet>>() {
             @Override
             public void onResponse(Call<List<Tweet>> call, Response<List<Tweet>> response) {

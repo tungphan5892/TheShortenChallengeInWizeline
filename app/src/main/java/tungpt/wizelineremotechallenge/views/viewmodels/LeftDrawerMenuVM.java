@@ -9,9 +9,12 @@ import android.widget.ImageView;
 import com.android.databinding.library.baseAdapters.BR;
 import com.squareup.picasso.Picasso;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import tungpt.wizelineremotechallenge.App.WizelineApp;
 import tungpt.wizelineremotechallenge.R;
 import tungpt.wizelineremotechallenge.listeners.ApiServices;
 import tungpt.wizelineremotechallenge.networks.RetroClient;
@@ -26,7 +29,6 @@ import tungpt.wizelineremotechallenge.views.models.LeftDrawerMenuModel;
 public class LeftDrawerMenuVM extends BaseObservable {
 
     private LeftDrawerMenuModel leftDrawerMenuModel = new LeftDrawerMenuModel();
-    private Context context;
     private User user;
     private ILeftDrawerMenuListener iLeftDrawerMenuListener;
 
@@ -35,10 +37,8 @@ public class LeftDrawerMenuVM extends BaseObservable {
     }
 
 
-    public LeftDrawerMenuVM(Context context) {
-        this.context = context;
-        int profileImageSize = (int) context.getResources().getDimension(R.dimen.profile_image_size);
-        leftDrawerMenuModel.setProfileImageSize(profileImageSize);
+    public LeftDrawerMenuVM() {
+        leftDrawerMenuModel.setProfileImageSize(WizelineApp.getProfileImageSize());
     }
 
     public LeftDrawerMenuModel getLeftDrawerMenuModel() {
@@ -95,7 +95,7 @@ public class LeftDrawerMenuVM extends BaseObservable {
         notifyPropertyChanged(BR.backgroundImageUrl);
     }
 
-//    @BindingAdapter("app:imageUrl")
+    //    @BindingAdapter("app:imageUrl")
     public static void loadImage(ImageView imageView, String imageUrl) {
         Picasso.with(imageView.getContext())
                 .load(imageUrl)
@@ -103,9 +103,8 @@ public class LeftDrawerMenuVM extends BaseObservable {
                 .into(imageView);
     }
 
-    public void loadingUserDataForView() {
+    public void loadingUserDataForView(ApiServices apiServices) {
         setShowLoading(true);
-        ApiServices apiServices = RetroClient.getApiServices();
         Call<User> call = apiServices.getUserJson();
         call.enqueue(new Callback<User>() {
             @Override

@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
 import tungpt.wizelineremotechallenge.R;
+import tungpt.wizelineremotechallenge.dagger.components.AppComponent;
 import tungpt.wizelineremotechallenge.views.activities.BaseActivity;
 import tungpt.wizelineremotechallenge.databinding.SingleTweetActivityBinding;
 import tungpt.wizelineremotechallenge.views.viewmodels.SingleTweetActivityVM;
@@ -20,9 +21,15 @@ public class SingleTweetActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        singleTweetActivityVM = new SingleTweetActivityVM(this);
+        singleTweetActivityVM = new SingleTweetActivityVM();
         singleTweetActivityBinding = DataBindingUtil.inflate(getLayoutInflater()
                 , R.layout.single_tweet_activity, baseActivityBinding.contentFrame, true);
         singleTweetActivityBinding.setViewModel(singleTweetActivityVM);
     }
+
+    @Override
+    protected void initInjector(AppComponent appComponent) {
+        appComponent.inject(this);
+    }
+
 }

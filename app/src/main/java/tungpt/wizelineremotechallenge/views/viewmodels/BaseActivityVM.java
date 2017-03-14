@@ -18,11 +18,9 @@ import tungpt.wizelineremotechallenge.views.models.BaseActivityModel;
  */
 
 public class BaseActivityVM extends BaseObservable {
-    private Context context;
     private BaseActivityModel baseActivityModel;
 
     public BaseActivityVM(Context context) {
-        this.context = context;
         baseActivityModel = new BaseActivityModel();
         int drawerLayoutMarginRight = (int) context.getResources()
                 .getDimension(R.dimen.navigation_drawer_margin_right_on_phone);

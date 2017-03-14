@@ -8,13 +8,14 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
+        android:name="tungpt.wizelineremotechallenge.App.WizelineApp"
         android:allowBackup="true"
         android:icon="@mipmap/wizeline"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="tungpt.wizelineremotechallenge.activities.featuresactivity.TimelineActivity">
+            android:name="tungpt.wizelineremotechallenge.views.activities.featuresactivity.TimelineActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -22,10 +23,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="tungpt.wizelineremotechallenge.activities.featuresactivity.SingleTweetActivity">
+            android:name="tungpt.wizelineremotechallenge.views.activities.featuresactivity.SingleTweetActivity">
         </activity>
         <activity
-            android:name="tungpt.wizelineremotechallenge.activities.featuresactivity.NewTweetActivity">
+            android:name="tungpt.wizelineremotechallenge.views.activities.featuresactivity.NewTweetActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible">
         </activity>
         <receiver
             android:name="tungpt.wizelineremotechallenge.broadcastreceivers.NetworkReceiver">

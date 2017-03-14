@@ -2,7 +2,6 @@ package tungpt.wizelineremotechallenge.App;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -10,18 +9,31 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
+import tungpt.wizelineremotechallenge.R;
+import tungpt.wizelineremotechallenge.dagger.components.AppComponent;
+import tungpt.wizelineremotechallenge.dagger.components.DaggerAppComponent;
+import tungpt.wizelineremotechallenge.dagger.modules.AppModule;
+import tungpt.wizelineremotechallenge.networks.RetroClient;
+
 /**
  * Created by tungphan on 3/10/17.
  */
 
 public class WizelineApp extends Application {
-
+    private AppComponent appComponent;
     private static WizelineApp instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+        appComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
+    }
+
+    public AppComponent getAppComponent() {
+        return appComponent;
     }
 
     public static WizelineApp getInstance() {
@@ -51,15 +63,21 @@ public class WizelineApp extends Application {
     }
 
 
-    public static float convertDpToPixel(float dp, Context context) {
-        Resources resources = context.getResources();
-        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+    public float convertDpToPixel(float dp) {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         return dp * ((float) displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
-    public static float convertPixelsToDp(float pixel, Context context) {
-        Resources resources = context.getResources();
-        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+    public float convertPixelsToDp(float pixel) {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         return pixel / ((float) displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    }
+
+    public int profileImageSize() {
+        return (int) getResources().getDimension(R.dimen.profile_image_size);
+    }
+
+    public static int getProfileImageSize(){
+        return instance.profileImageSize();
     }
 }
