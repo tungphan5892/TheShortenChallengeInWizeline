@@ -34,8 +34,15 @@
     <dimen name="profile_image_margin_right">16dp</dimen>
     <dimen name="navigation_drawer_width">280dp</dimen>
     <dimen name="navigation_drawer_margin_right_on_phone">56dp</dimen>
+    <dimen name="reply_tweet_container_height">56dp</dimen>
     <dimen name="normal_margin_between_btns">16dp</dimen>
     <dimen name="default_new_tweet_layout_control_height">56dp</dimen>
     <dimen name="default_new_tweet_description_height">300dp</dimen>
+    <dimen name="default_tweet_description_height">200dp</dimen>
+    <dimen name="new_tweet_description_height_keyboard_shown">150dp</dimen>
     <dimen name="default_new_tweet_gallery_height">300dp</dimen>
+    <dimen name="toolbar_profile_image_btn_size">36dp</dimen>
+    <dimen name="tweet_media_height">150dp</dimen>
+    <dimen name="normal_view_view_margin">16dp</dimen>
+    <dimen name="normal_footer_height">56dp</dimen>
 </resources>

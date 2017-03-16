@@ -17,31 +17,25 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <ScrollView
-            android:id="@+id/edittext_tweet"
+        <EditText
+            android:id="@+id/tweet_description"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/default_new_tweet_description_height">
-
-            <EditText
-                android:id="@+id/tweet_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/single_tweet_child_view_margin"
-                android:layout_marginLeft="@dimen/single_tweet_child_view_margin"
-                android:layout_marginRight="@dimen/single_tweet_child_view_margin"
-                android:layout_marginStart="@dimen/single_tweet_child_view_margin"
-                android:background="@android:color/transparent"
-                android:gravity="top|left"
-                android:hint="@string/hint_tweet_text"
-                android:imeOptions="actionDone"
-                android:maxLength="@integer/maximum_tweet" />
-        </ScrollView>
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/single_tweet_child_view_margin"
+            android:layout_marginLeft="@dimen/single_tweet_child_view_margin"
+            android:layout_marginRight="@dimen/single_tweet_child_view_margin"
+            android:layout_marginStart="@dimen/single_tweet_child_view_margin"
+            android:background="@android:color/transparent"
+            android:gravity="top|left"
+            android:hint="@string/hint_tweet_text"
+            android:imeOptions="actionDone"
+            android:maxLength="@integer/maximum_tweet" />
 
         <FrameLayout
             android:id="@+id/under_line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@id/edittext_tweet"
+            android:layout_below="@id/tweet_description"
             android:background="@android:color/darker_gray">
 
         </FrameLayout>
@@ -62,9 +56,10 @@
                 android:layout_marginEnd="@dimen/single_tweet_child_view_margin"
                 android:layout_marginRight="@dimen/single_tweet_share_btn_marginright"
                 android:background="@drawable/button_search_shape"
-                android:text="@string/text_share_button"
+                android:text="@string/text_tweet_button"
                 android:textSize="@dimen/share_button_text_size"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:onClick="@{viewModel.clickNewTweetButton}"/>
 
             <TextView
                 android:layout_width="wrap_content"

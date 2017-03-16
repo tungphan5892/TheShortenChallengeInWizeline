@@ -8,6 +8,7 @@ public class NewTweetModel {
 
     private int tweetCount;
     private String tweetCountText = "140";
+    private boolean showKeyboard;
 
     public void setTweetCount(int tweetCount){
         this.tweetCount = tweetCount;
@@ -23,5 +24,13 @@ public class NewTweetModel {
 
     public String getTweetCountText(){
         return tweetCountText;
+    }
+
+    public void setShowKeyboard(boolean showKeyboard){
+        this.showKeyboard = showKeyboard;
+    }
+
+    public boolean getShowKeyboard(){
+        return showKeyboard;
     }
 }

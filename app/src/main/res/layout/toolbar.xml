@@ -20,21 +20,21 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <RelativeLayout
+            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <!-- This is a centered title -->
             <TextView
                 android:id="@+id/screen_title"
                 style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
                 android:gravity="center_vertical"
+                android:layout_centerVertical="true"
                 android:orientation="vertical"
                 android:text="@string/title_home"
                 android:textColor="@color/black"
-                android:visibility="visible" />
+                android:visibility="visible"/>
 
             <ImageButton
                 android:id="@+id/btn_search"
@@ -54,6 +54,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/icon_close_black"
+                android:onClick="@{viewModel.clickCloseButton}"
                 android:visibility="@{viewModel.btnCloseVisible ? View.VISIBLE : View.GONE}"/>
 
         </RelativeLayout>

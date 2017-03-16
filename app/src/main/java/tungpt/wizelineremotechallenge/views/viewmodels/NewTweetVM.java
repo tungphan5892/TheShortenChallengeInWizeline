@@ -1,18 +1,44 @@
 package tungpt.wizelineremotechallenge.views.viewmodels;
 
 
+import android.app.Activity;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.databinding.BindingAdapter;
+import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.Toast;
 
+
+import java.util.ArrayList;
+
+import javax.inject.Inject;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import tungpt.wizelineremotechallenge.App.WizelineApp;
 import tungpt.wizelineremotechallenge.BR;
+import tungpt.wizelineremotechallenge.R;
 import tungpt.wizelineremotechallenge.databinding.NewTweetActivityBinding;
+import tungpt.wizelineremotechallenge.listeners.ApiServices;
+import tungpt.wizelineremotechallenge.manageconstants.ActivityRequestCode;
+import tungpt.wizelineremotechallenge.manageconstants.IntentConstants;
+import tungpt.wizelineremotechallenge.views.adapters.PhoneImagesGridVAdapter;
 import tungpt.wizelineremotechallenge.views.iviewlistener.INewTweetViewModel;
 import tungpt.wizelineremotechallenge.views.models.NewTweetModel;
 
@@ -20,34 +46,26 @@ import tungpt.wizelineremotechallenge.views.models.NewTweetModel;
  * Created by tungphan on 3/9/17.
  */
 
-public class NewTweetVM extends BaseObservable implements INewTweetViewModel {
-    private static final int MAX_TWEET_LENGTH = 140;
+public class NewTweetVM extends BaseObservable implements INewTweetViewModel, LoaderManager.LoaderCallbacks {
+    private final int MAX_TWEET_LENGTH = 140;
+    private final int EXTERNAL_IMAGES_LOADER_ID = 0;
     private final NewTweetModel newTweetModel = new NewTweetModel();
     private NewTweetActivityBinding newTweetActivityBinding;
-//    private boolean keyboardListenersAttached = false;
-//    private int previousRootViewHeight;
+    private PhoneImagesGridVAdapter phoneImagesGridVAdapter;
+    private Activity activity;
+    private ArrayList<String> imagesPath = new ArrayList<>();
+    private Uri imagesUri;
+    private ApiServices apiServices;
 
-//    private ViewTreeObserver.OnGlobalLayoutListener keyboardLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
-//        @Override
-//        public void onGlobalLayout() {
-//            int newHeight = newTweetActivityBinding.newTweetRootLayout.getHeight();
-//            Rect rect = new Rect();
-//            newTweetActivityBinding.newTweetRootLayout.getWindowVisibleDisplayFrame(rect);
-//            int screenHeight = newTweetActivityBinding.newTweetRootLayout.getRootView().getHeight();
-//            int keyboardHeight = screenHeight - (rect.bottom);
-//            if (previousRootViewHeight != 0) {
-//                if (previousRootViewHeight > newHeight) {
-//                } else if (previousRootViewHeight < newHeight) {
-//                } else {
-//                    Log.e("TFunk", "nothing");
-//                }
-//            }
-//            previousRootViewHeight = newHeight;
-//        }
-//    };
+    public static String getBucketId(String path) {
+        return String.valueOf(path.toLowerCase().hashCode());
+    }
 
-    public NewTweetVM(NewTweetActivityBinding newTweetActivityBinding) {
+    public NewTweetVM(Activity activity, NewTweetActivityBinding newTweetActivityBinding
+            , ApiServices apiServices) {
+        this.activity = activity;
         this.newTweetActivityBinding = newTweetActivityBinding;
+        this.apiServices = apiServices;
     }
 
     public INewTweetViewModel getINewTweetViewModel() {
@@ -77,16 +95,45 @@ public class NewTweetVM extends BaseObservable implements INewTweetViewModel {
     @Override
     public void onCreate() {
         setTweetDescriptionChanged();
-        attachKeyboardListeners();
+        setupSoftKeyboardListener();
+        activity.getLoaderManager().initLoader(EXTERNAL_IMAGES_LOADER_ID, null, this);
+    }
+
+    private void setupSoftKeyboardListener() {
+        final View contentView = activity
+                .findViewById(android.R.id.content);
+        contentView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            private int previousHeight;
+
+            @Override
+            public void onGlobalLayout() {
+                Rect rect = new Rect();
+                newTweetActivityBinding.tweetDescription.getWindowVisibleDisplayFrame(rect);
+                int newHeight = rect.height();
+                if (previousHeight != 0) {
+                    if (previousHeight > newHeight) {
+                        newTweetActivityBinding.tweetDescription.setHeight(
+                                WizelineApp.getInstance().getPixelFromResources(R.dimen.new_tweet_description_height_keyboard_shown)
+                        );
+                    } else if (previousHeight < newHeight) {
+                        newTweetActivityBinding.tweetDescription.setHeight(
+                                WizelineApp.getInstance().getPixelFromResources(R.dimen.default_new_tweet_description_height)
+                        );
+                    } else {
+                    }
+                }
+                previousHeight = newHeight;
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onDestroy() {
-//        if (keyboardListenersAttached) {
-//            newTweetActivityBinding.newTweetRootLayout.getViewTreeObserver()
-//                    .removeOnGlobalLayoutListener(keyboardLayoutListener);
-//        }
+    }
+
+    @Override
+    public void onResume() {
     }
 
     private void setTweetDescriptionChanged() {
@@ -109,19 +156,75 @@ public class NewTweetVM extends BaseObservable implements INewTweetViewModel {
         });
     }
 
-    private void attachKeyboardListeners() {
-//        if (keyboardListenersAttached) {
-//            return;
-//        }
-//        newTweetActivityBinding.newTweetRootLayout.getViewTreeObserver()
-//                .addOnGlobalLayoutListener(keyboardLayoutListener);
-//        keyboardListenersAttached = true;
+    public void setShowKeyboard(boolean showKeyboard) {
+        newTweetModel.setShowKeyboard(showKeyboard);
+        notifyPropertyChanged(BR.showKeyboard);
     }
 
-    @BindingAdapter("android:layout_height")
-    public static void setLayoutHeight(View view, float height) {
-        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-        layoutParams.height = (int) height;
-        view.setLayoutParams(layoutParams);
+    @Bindable
+    public boolean getShowKeyboard() {
+        return newTweetModel.getShowKeyboard();
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        String[] projection = {
+                MediaStore.Images.Media.DATA
+        };
+        return new CursorLoader(activity
+                , MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, projection, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader loader, Object data) {
+        Cursor cursor = (Cursor) data;
+        if (data != null) {
+            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            if (cursor.moveToFirst()) {
+                do {
+                    imagesPath.add(cursor.getString(columnIndex));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        phoneImagesGridVAdapter = new PhoneImagesGridVAdapter(activity, imagesPath);
+        newTweetActivityBinding.gridviewCategory
+                .setOnScrollListener(phoneImagesGridVAdapter.getOnScrollListener());
+        newTweetActivityBinding.gridviewCategory.setAdapter(phoneImagesGridVAdapter);
+    }
+
+    @Override
+    public void onLoaderReset(Loader loader) {
+
+    }
+
+    public void clickNewTweetButton(@NonNull final View view) {
+//        showLoading();
+        if (apiServices != null) {
+            Call<ResponseBody> call = apiServices.postNewTweet(getTweetDescription());
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                hideLoading();
+                    if (response.isSuccessful()) {
+                        activity.setResult(Activity.RESULT_OK);
+                    } else {
+                        activity.setResult(Activity.RESULT_CANCELED);
+                    }
+                    activity.finish();
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable throwable) {
+//                hideLoading();
+                    activity.setResult(Activity.RESULT_CANCELED);
+                    activity.finish();
+                }
+            });
+        }
+    }
+
+    public String getTweetDescription() {
+        return newTweetActivityBinding.tweetDescription.getText().toString();
     }
 }

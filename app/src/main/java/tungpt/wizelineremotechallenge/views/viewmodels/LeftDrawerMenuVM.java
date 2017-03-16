@@ -1,25 +1,26 @@
 package tungpt.wizelineremotechallenge.views.viewmodels;
 
+import android.app.Activity;
 import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.databinding.BindingAdapter;
+import android.support.design.widget.Snackbar;
 import android.widget.ImageView;
 
 import com.android.databinding.library.baseAdapters.BR;
 import com.squareup.picasso.Picasso;
 
-import javax.inject.Inject;
+import org.greenrobot.eventbus.EventBus;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import tungpt.wizelineremotechallenge.App.WizelineApp;
 import tungpt.wizelineremotechallenge.R;
+import tungpt.wizelineremotechallenge.databinding.LeftDrawerMenuViewBinding;
+import tungpt.wizelineremotechallenge.eventbus.FinishLoadingUserInfoEvent;
 import tungpt.wizelineremotechallenge.listeners.ApiServices;
-import tungpt.wizelineremotechallenge.networks.RetroClient;
 import tungpt.wizelineremotechallenge.networks.models.User;
-import tungpt.wizelineremotechallenge.views.iviewlistener.ILeftDrawerMenuListener;
 import tungpt.wizelineremotechallenge.views.models.LeftDrawerMenuModel;
 
 /**
@@ -30,14 +31,13 @@ public class LeftDrawerMenuVM extends BaseObservable {
 
     private LeftDrawerMenuModel leftDrawerMenuModel = new LeftDrawerMenuModel();
     private User user;
-    private ILeftDrawerMenuListener iLeftDrawerMenuListener;
-
-    public void setiLeftDrawerMenuListener(ILeftDrawerMenuListener iLeftDrawerMenuListener) {
-        this.iLeftDrawerMenuListener = iLeftDrawerMenuListener;
-    }
+    private Context context;
+    private LeftDrawerMenuViewBinding leftDrawerMenuViewBinding;
 
 
-    public LeftDrawerMenuVM() {
+    public LeftDrawerMenuVM(Context context, LeftDrawerMenuViewBinding leftDrawerMenuViewBinding) {
+        this.context = context;
+        this.leftDrawerMenuViewBinding = leftDrawerMenuViewBinding;
         leftDrawerMenuModel.setProfileImageSize(WizelineApp.getProfileImageSize());
     }
 
@@ -95,8 +95,7 @@ public class LeftDrawerMenuVM extends BaseObservable {
         notifyPropertyChanged(BR.backgroundImageUrl);
     }
 
-    //    @BindingAdapter("app:imageUrl")
-    public static void loadImage(ImageView imageView, String imageUrl) {
+    private void loadImage(ImageView imageView, String imageUrl) {
         Picasso.with(imageView.getContext())
                 .load(imageUrl)
                 .placeholder(R.drawable.face)
@@ -117,17 +116,30 @@ public class LeftDrawerMenuVM extends BaseObservable {
                         setUserDescription(user.getDescription());
                         setProfileImageUrl(user.getProfileImageUrl());
                         setBackgroundImageUrl(user.getProfileBackgroundImageUrl());
-                        iLeftDrawerMenuListener.successLoadingData(user);
+                        successLoadingUserData();
                     }
                 } else {
-                    iLeftDrawerMenuListener.errorLoadingData();
+                    errorLoadingUserData();
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable throwable) {
                 setShowLoading(false);
+                errorLoadingUserData();
             }
         });
+    }
+
+    private void successLoadingUserData() {
+        EventBus.getDefault().post(new FinishLoadingUserInfoEvent(Activity.RESULT_OK
+                , user.getProfileImageUrl()));
+        loadImage(leftDrawerMenuViewBinding.userProfileImage, user.getProfileImageUrl());
+        loadImage(leftDrawerMenuViewBinding.userBackgroundImage, user.getProfileBackgroundImageUrl());
+    }
+
+    private void errorLoadingUserData() {
+        Snackbar.make(leftDrawerMenuViewBinding.leftDrawerLayout, R.string.error_data_in_response
+                , Snackbar.LENGTH_LONG).show();
     }
 }

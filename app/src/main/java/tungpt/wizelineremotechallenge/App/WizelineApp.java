@@ -77,6 +77,10 @@ public class WizelineApp extends Application {
         return (int) getResources().getDimension(R.dimen.profile_image_size);
     }
 
+    public int getPixelFromResources(int id){
+        return (int) getResources().getDimension(id);
+    }
+
     public static int getProfileImageSize(){
         return instance.profileImageSize();
     }

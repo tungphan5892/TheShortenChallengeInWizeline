@@ -23,7 +23,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="tungpt.wizelineremotechallenge.views.activities.featuresactivity.SingleTweetActivity">
+            android:name="tungpt.wizelineremotechallenge.views.activities.featuresactivity.SingleTweetActivity"
+            android:windowSoftInputMode="adjustResize">
         </activity>
         <activity
             android:name="tungpt.wizelineremotechallenge.views.activities.featuresactivity.NewTweetActivity"

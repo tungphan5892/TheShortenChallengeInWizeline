@@ -8,4 +8,5 @@ public interface IntentConstants {
     String OWNER_NAME = "owner_name";
     String TWEET_DESCRIPTION = "tweet_description";
     String CUSTOM_BROADCAST_NETWORK_DISCONNECT = "custom_broadcast_network_disconnect";
+    String POST_TWEET_RESULT = "post_tweet_result";
 }

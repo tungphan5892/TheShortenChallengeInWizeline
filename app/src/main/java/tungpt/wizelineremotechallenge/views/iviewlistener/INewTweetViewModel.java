@@ -9,4 +9,6 @@ public interface INewTweetViewModel {
     void onCreate();
 
     void onDestroy();
+
+    void onResume();
 }

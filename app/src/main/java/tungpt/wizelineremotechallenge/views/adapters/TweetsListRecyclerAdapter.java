@@ -55,8 +55,12 @@ public class TweetsListRecyclerAdapter extends RecyclerView.Adapter<TweetsListRe
         LinearLayout itemWrapLayout = viewHolder.mItemWrapLayout;
         nameTextView.setText(tweet.getUser().getName());
         tweetTextView.setText(tweet.getText());
-        Picasso.with(mContext).load(tweet.getUser().getProfileImageUrl()).resize((int) mProfileImageWidth,
-                (int) mProfileImageWidth).onlyScaleDown().into(profilePicImView);
+        Picasso.with(mContext)
+                .load(tweet.getUser().getProfileImageUrl())
+                .placeholder(R.drawable.face)
+                .resize((int) mProfileImageWidth, (int) mProfileImageWidth)
+                .onlyScaleDown()
+                .into(profilePicImView);
         final Context context = viewHolder.mContext;
         itemWrapLayout.setOnClickListener(new View.OnClickListener() {
             @Override

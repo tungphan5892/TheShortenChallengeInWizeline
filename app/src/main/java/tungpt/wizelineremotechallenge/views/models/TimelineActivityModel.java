@@ -8,6 +8,7 @@ package tungpt.wizelineremotechallenge.views.models;
 public class TimelineActivityModel {
 
     private boolean showLoading = false;
+    private boolean tweetRecyclerViewVisible = false;
 
     public boolean isShowLoading() {
         return showLoading;
@@ -15,5 +16,13 @@ public class TimelineActivityModel {
 
     public void setShowLoading(boolean showLoading) {
         this.showLoading = showLoading;
+    }
+
+    public boolean getTweetRecyclerViewVisible() {
+        return tweetRecyclerViewVisible;
+    }
+
+    public void setTweetRecyclerViewVisible(boolean tweetRecyclerViewVisible) {
+        this.tweetRecyclerViewVisible = tweetRecyclerViewVisible;
     }
 }

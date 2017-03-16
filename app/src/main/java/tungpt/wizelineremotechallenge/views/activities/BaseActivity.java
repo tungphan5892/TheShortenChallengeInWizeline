@@ -22,11 +22,13 @@ import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
@@ -37,6 +39,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+
 import tungpt.wizelineremotechallenge.App.WizelineApp;
 import tungpt.wizelineremotechallenge.R;
 import tungpt.wizelineremotechallenge.dagger.components.AppComponent;
@@ -56,11 +59,10 @@ import tungpt.wizelineremotechallenge.views.viewmodels.ToolbarVM;
 public abstract class BaseActivity extends AppCompatActivity {
     private static final String TAG = BaseActivity.class.getSimpleName();
     private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
-    private LocalBroadcastManager mLocalBroadcastManager;
-    protected ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
-    private String[] mPlanetTitles;
+    private LocalBroadcastManager localBroadcastManager;
+    protected ActionBarDrawerToggle drawerToggle;
+    private CharSequence drawerTitle;
+    private CharSequence title;
     private ToolbarBinding toolbarBinding;
     private BaseActivityVM baseActivityVM;
     protected MainLayoutWithNavigationDrawerBinding baseActivityBinding;
@@ -77,7 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (Utils.isHigherThanMasmarlow()) {
             requestPermissionIfNeeded();
         }
-        mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
         initToolbar();
     }
 
@@ -103,19 +105,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void initToolbar() {
         toolbarBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.toolbar
                 , baseActivityBinding.toolbar, true);
-        toolbarVM = new ToolbarVM();
+        toolbarVM = new ToolbarVM(this);
         toolbarBinding.setViewModel(toolbarVM);
         toolbarBinding.toolbar.setBackgroundColor(Color.WHITE);
         setSupportActionBar(toolbarBinding.toolbar);
     }
 
     protected void initNavigationDrawer() {
-        mTitle = mDrawerTitle = getTitle();
-        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
+        title = drawerTitle = getTitle();
         baseActivityBinding.drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        mDrawerToggle = new ActionBarDrawerToggle(
+        drawerToggle = new ActionBarDrawerToggle(
                 this,
                 baseActivityBinding.drawerLayout,
                 toolbarBinding.toolbar,
@@ -123,16 +124,23 @@ public abstract class BaseActivity extends AppCompatActivity {
                 R.string.drawer_close
         ) {
             public void onDrawerClosed(View view) {
-                getSupportActionBar().setTitle(mTitle);
+                getSupportActionBar().setTitle(title);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
-
             public void onDrawerOpened(View drawerView) {
-                getSupportActionBar().setTitle(mDrawerTitle);
+                getSupportActionBar().setTitle(drawerTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
-        baseActivityBinding.drawerLayout.addDrawerListener(mDrawerToggle);
+        baseActivityBinding.drawerLayout.addDrawerListener(drawerToggle);
+    }
+
+    private ImageButton getToggleMenu(){
+        final ArrayList<View> outViews = new ArrayList<>();
+        String contentDesc = getResources().getString(R.string.drawer_open);
+        baseActivityBinding.toolbar.findViewsWithText(outViews, contentDesc
+                , View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
+        return (ImageButton) outViews.get(0);
     }
 
     protected void loadUserDataInNavigationDrawer(ApiServices apiServices) {
@@ -151,19 +159,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
+        if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
         switch (item.getItemId()) {
-//            case R.id.action_websearch:
-//                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-//                intent.putExtra(SearchManager.QUERY, getSupportActionBar().getTitle());
-//                if (intent.resolveActivity(getPackageManager()) != null) {
-//                    startActivity(intent);
-//                } else {
-//                    Toast.makeText(this, R.string.app_not_available, Toast.LENGTH_LONG).show();
-//                }
-//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -171,28 +170,28 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     public void setTitle(CharSequence title) {
-        mTitle = title;
-        getSupportActionBar().setTitle(mTitle);
+        this.title = title;
+        getSupportActionBar().setTitle(title);
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        if (mDrawerToggle != null) {
-            mDrawerToggle.syncState();
+        if (drawerToggle != null) {
+            drawerToggle.syncState();
         }
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        mLocalBroadcastManager.registerReceiver(mNetworkDisconnectBReceiver, new IntentFilter(IntentConstants.CUSTOM_BROADCAST_NETWORK_DISCONNECT));
+        localBroadcastManager.registerReceiver(mNetworkDisconnectBReceiver, new IntentFilter(IntentConstants.CUSTOM_BROADCAST_NETWORK_DISCONNECT));
     }
 
     @Override
@@ -272,7 +271,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        mLocalBroadcastManager.unregisterReceiver(mNetworkDisconnectBReceiver);
+        localBroadcastManager.unregisterReceiver(mNetworkDisconnectBReceiver);
     }
 
     @Override
@@ -304,15 +303,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void doThis(FinishLoadingUserInfoEvent finishLoadingUserInfoEvent) {
         if (finishLoadingUserInfoEvent.getResultCode() == Activity.RESULT_OK) {
-            final ArrayList<View> outViews = new ArrayList<>();
-            String contentDesc = getResources().getString(R.string.drawer_open);
-            baseActivityBinding.toolbar.findViewsWithText(outViews, contentDesc
-                    , View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
-            ImageButton imageButton = (ImageButton) outViews.get(0);
             Picasso.with(this)
                     .load(finishLoadingUserInfoEvent.getUserProfileImageUrl())
                     .placeholder(R.drawable.face)
-                    .into(imageButton);
+                    .into(getToggleMenu());
         }
     }
 

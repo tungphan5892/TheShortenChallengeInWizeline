@@ -14,7 +14,8 @@
     <RelativeLayout
         android:id="@+id/parent_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/empty_data_image">
 
         <FrameLayout
             android:id="@+id/under_line"
@@ -29,13 +30,20 @@
             android:layout_height="match_parent"
             android:layout_below="@id/under_line">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/tweets_recycler_view"
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white">
+                android:layout_height="match_parent">
 
-            </android.support.v7.widget.RecyclerView>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/tweets_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:visibility="@{viewModel.tweetRecyclerViewVisible? View.VISIBLE : View.GONE}">
+
+                </android.support.v7.widget.RecyclerView>
+            </android.support.v4.widget.SwipeRefreshLayout>
 
             <ProgressBar
                 android:id="@+id/tweets_recycler_progress_dialog"
@@ -50,8 +58,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
                 android:layout_margin="16dp"
-                android:onClick="@{viewModel.addTweetButtonClick}"
                 android:clickable="true"
+                android:onClick="@{viewModel.clickAddTweetButton}"
                 android:src="@drawable/add_btn"
                 app:layout_anchorGravity="bottom|right|end" />
 

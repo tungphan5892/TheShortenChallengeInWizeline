@@ -45,4 +45,9 @@
     <string name="snackbar_text_no_internet">Devices doesn\'t connect to internet.</string>
     <integer name="maximum_tweet">140</integer>
     <string name="hint_tweet_text">What\'s happening?</string>
+    <string name="tweet_successfully">Your Tweet is posted.</string>
+    <string name="tweet_fail">Failed to post tweet.</string>
+    <string name="text_share_tweet">Share Tweet</string>
+    <string name="text_share_tweet_successful">Share Tweet Successfully!</string>
+    <string name="text_share_tweet_fail">Share Tweet failed :(</string>
 </resources>
